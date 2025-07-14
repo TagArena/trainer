@@ -17,17 +17,15 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
 
 @Log4j2
 @RestController
+@RequiredArgsConstructor
 public class TrainerResource extends AbstractResource {
 
 	private final TrainerService trainerService;
 
-	@Autowired
-	public TrainerResource(TrainerService trainerService) {
-		this.trainerService = trainerService;
-	}
 
 	// @formatter:off
     @Operation(summary = "Creates trainers according to the given parameters", description = "Creates trainers according to the given parameters")
