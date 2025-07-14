@@ -13,7 +13,7 @@ import com.tagarena.trainer.rest.model.TrainerDto;
 import com.tagarena.trainer.service.model.exception.TrainerNotFoundException;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-import com.arakelian.service.RandomPerson;
+import com.github.javafaker.*;
 import org.modelmapper.TypeToken;
 
 @Service
@@ -34,9 +34,10 @@ public class TrainerServiceImpl implements TrainerService {
 
 	public List<TrainerDto> createTrainers(TrainerCreationDto trainerCreationDto) {
 		List<TrainerEntity> trainers = new ArrayList<>();
+		Faker faker = new Faker();
 		for (int i = 0; i < trainerCreationDto.getAmount(); i++) {
 			TrainerEntity trainer = new TrainerEntity();
-			trainer.setName(RandomPerson.get().next().getFirstname);
+			trainer.setName(faker.name().fullName());
 		}
 		List<TrainerEntity> savedTrainers = trainerRepository.saveAll(trainers);
 		// @formatter:off
