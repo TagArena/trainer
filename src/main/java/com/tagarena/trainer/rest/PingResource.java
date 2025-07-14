@@ -1,7 +1,7 @@
-package com.frameboter.template.rest;
+package com.tagarena.trainer.rest;
 
 import com.frameboter.rest.AbstractResource;
-import com.frameboter.template.rest.model.Ping;
+import com.tagarena.trainer.rest.model.Ping;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

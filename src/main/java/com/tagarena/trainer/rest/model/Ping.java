@@ -1,4 +1,4 @@
-package com.frameboter.template.rest.model;
+package com.tagarena.trainer.rest.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
