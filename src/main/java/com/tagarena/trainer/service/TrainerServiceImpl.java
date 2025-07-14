@@ -13,7 +13,7 @@ import com.tagarena.trainer.rest.model.TrainerDto;
 import com.tagarena.trainer.service.model.exception.TrainerNotFoundException;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-import com.github.javafaker.Faker;
+import com.github.javafaker.*;
 import org.modelmapper.TypeToken;
 
 @Service
