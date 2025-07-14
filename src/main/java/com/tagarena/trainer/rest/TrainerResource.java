@@ -1,25 +1,23 @@
 package com.tagarena.trainer.rest;
 
-import com.frameboter.rest.AbstractResource;
 import com.tagarena.trainer.rest.model.TrainerCreationDto;
 import com.tagarena.trainer.rest.model.TrainerDto;
 import com.tagarena.trainer.service.TrainerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Log4j2
 @RestController
 @RequiredArgsConstructor
-public class TrainerResource extends AbstractResource {
+public class TrainerResource {
 
     private final TrainerService trainerService;
 
@@ -30,7 +28,7 @@ public class TrainerResource extends AbstractResource {
     })
     @PostMapping("/trainers")
 	// @formatter:on
-    List<TrainerDto> createTrainers(TrainerCreationDto trainerCreationDto) {
+    List<TrainerDto> createTrainers(@RequestBody @Valid TrainerCreationDto trainerCreationDto) {
 
         log.info("createTrainers called with {}", trainerCreationDto);
         List<TrainerDto> trainers = trainerService.createTrainers(trainerCreationDto);
@@ -47,7 +45,7 @@ public class TrainerResource extends AbstractResource {
 	})
 	@GetMapping("/trainers/{id}")
 	// @formatter:on
-    TrainerDto getTrainer(@PathVariable Long id) {
+    TrainerDto getTrainer(@NotNull @PathVariable Long id) {
 
         log.info("getTrainer called with id={}", id);
         TrainerDto trainer = trainerService.getTrainer(id);

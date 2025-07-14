@@ -1,7 +1,13 @@
 package com.tagarena.trainer.repository.model;
 
-import lombok.*;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -10,10 +16,11 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 public class TrainerEntity {
 
-	@Id
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String name;
+    private String name;
 
-	private Long creatureId;
+    private Long creatureId;
 }
