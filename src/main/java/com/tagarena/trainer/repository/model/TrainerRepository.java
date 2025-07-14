@@ -1,5 +1,7 @@
 package com.tagarena.trainer.repository.model;
 
-public interface TrainerRepository extends CrudRepository<TrainerEntity, Long>{
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TrainerRepository extends JpaRepository<TrainerEntity, Long> {
 
 }

@@ -1,8 +1,13 @@
 package com.tagarena.trainer.repository.model;
 
+import lombok.*;
+import jakarta.persistence.*;
+
 @Entity
 @Getter
 @Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class TrainerEntity {
 
 	@Id

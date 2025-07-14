@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
+
 import com.tagarena.trainer.repository.model.TrainerEntity;
 import com.tagarena.trainer.repository.model.TrainerRepository;
 import com.tagarena.trainer.rest.model.TrainerCreationDto;
 import com.tagarena.trainer.rest.model.TrainerDto;
 import com.tagarena.trainer.service.model.exception.TrainerNotFoundException;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class TrainerServiceImpl implements TrainerService {
 
 	private final TrainerRepository trainerRepository;
 
 	private final ModelMapper modelMapper;
 
-	@Autowired
-	public TrainerServiceImpl(Modelmapper modelmapper, TrainerRepository trainerRepository) {
-		this.modelMapper = modelMapper;
-		this.trainerRepository = trainerRepository;
-	}
-
 	public TrainerDto getTrainer(Long trainerId) {
 		Optional<TrainerEntity> trainerEntityOptional = trainerRepository.findById(trainerId);
 		if (!trainerEntityOptional.isPresent()) {
-		throw new TrainerNotFoundException("Trainer with id " + trainerId + " not found");
+			throw new TrainerNotFoundException("Trainer with id " + trainerId + " not found");
 		}
 		return modelMapper.map(trainerEntityOptional.get(), TrainerDto.class);
 	}
