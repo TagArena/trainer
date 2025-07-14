@@ -17,6 +17,11 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.arakelian</groupId>
+            <artifactId>faker</artifactId>
+            <version>4.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
