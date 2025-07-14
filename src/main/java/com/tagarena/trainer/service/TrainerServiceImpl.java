@@ -11,7 +11,7 @@ import com.tagarena.trainer.repository.model.TrainerRepository;
 import com.tagarena.trainer.rest.model.TrainerCreationDto;
 import com.tagarena.trainer.rest.model.TrainerDto;
 import com.tagarena.trainer.service.model.exception.TrainerNotFoundException;
-import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
