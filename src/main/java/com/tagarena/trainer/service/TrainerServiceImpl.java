@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 
 import com.tagarena.trainer.repository.model.TrainerEntity;
-import com.tagarena.trainer.repository.model.TrainerRepository;
+import com.tagarena.trainer.repository.TrainerRepository;
 import com.tagarena.trainer.rest.model.TrainerCreationDto;
 import com.tagarena.trainer.rest.model.TrainerDto;
 import com.tagarena.trainer.service.model.exception.TrainerNotFoundException;
@@ -26,7 +26,7 @@ public class TrainerServiceImpl implements TrainerService {
 
 	public TrainerDto getTrainer(Long trainerId) {
 		Optional<TrainerEntity> trainerEntityOptional = trainerRepository.findById(trainerId);
-		if (!trainerEntityOptional.isPresent()) {
+		if (trainerEntityOptional.isEmpty()) {
 			throw new TrainerNotFoundException("Trainer with id " + trainerId + " not found");
 		}
 		return modelMapper.map(trainerEntityOptional.get(), TrainerDto.class);
@@ -38,6 +38,7 @@ public class TrainerServiceImpl implements TrainerService {
 		for (int i = 0; i < trainerCreationDto.getAmount(); i++) {
 			TrainerEntity trainer = new TrainerEntity();
 			trainer.setName(faker.name().fullName());
+			trainers.add(trainer);
 		}
 		List<TrainerEntity> savedTrainers = trainerRepository.saveAll(trainers);
 		// @formatter:off

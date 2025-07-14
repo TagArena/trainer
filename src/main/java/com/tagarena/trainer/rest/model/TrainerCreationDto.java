@@ -4,6 +4,7 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class TrainerCreationDto {
 
 	private Long amount;
