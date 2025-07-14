@@ -52,7 +52,7 @@ public class TrainerResource extends AbstractResource {
 	// @formatter:on
 	TrainerDto getTrainer(@PathVariable Long id) {
 
-		log.info("getTrainer called with id={}", trainerCreationDto);
+		log.info("getTrainer called with id={}", id);
 		TrainerDto trainer = trainerService.getTrainer(id);
 		log.info("getTrainer finished with result={}", trainer);
 		return trainer;
