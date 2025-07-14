@@ -32,18 +32,33 @@ public class TrainerResource extends AbstractResource {
 	}
 
 	// @formatter:off
-    @Operation(summary = "Creates trainers acording to the given parameters", description = "Creates trainers acording to the given parameters")
+    @Operation(summary = "Creates trainers according to the given parameters", description = "Creates trainers according to the given parameters")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Trainers created successfully"),
-            @ApiResponse(responseCode = "404", description = "Trainers created successfully")
+            @ApiResponse(responseCode = "200", description = "Trainers created successfully")
     })
     @PostMapping("/trainers")
 	// @formatter:on
 	List<TrainerDto> createTrainers(TrainerCreationDto trainerCreationDto) {
 
-		log.info("Create Trainers called with {}", trainerCreationDto);
+		log.info("createTrainers called with {}", trainerCreationDto);
 		List<TrainerDto> trainers = trainerService.createTrainers(trainerCreationDto);
-		log.info("Create Trainers finished with {}", trainers);
+		log.info("createTrainers finished with result={}", trainers);
 		return trainers;
+	}
+
+	// @formatter:off
+	@Operation(summary = "Retrieves a trainer by their trainerId", description = "Retrieves a trainer by their trainerId")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Trainer retrieved successfully"),
+		@ApiResponse(responseCode = "404", description = "Trainers not found")
+	})
+	@GetMapping("/trainers/{id}")
+	// @formatter:on
+	TrainerDto getTrainer(@PathVariable Long id) {
+
+		log.info("getTrainer called with id={}", trainerCreationDto);
+		TrainerDto trainer = trainerService.getTrainer(id);
+		log.info("getTrainer finished with result={}", trainer);
+		return trainer;
 	}
 }
