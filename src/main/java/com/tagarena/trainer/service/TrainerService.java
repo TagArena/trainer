@@ -11,4 +11,5 @@ public interface TrainerService {
 
 	List<TrainerDto> createTrainers(TrainerCreationDto trainerDto);
 
+    TrainerDto updateTrainer(Long trainerId, TrainerDto trainerUpdate);
 }

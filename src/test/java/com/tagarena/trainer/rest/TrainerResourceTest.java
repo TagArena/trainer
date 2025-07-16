@@ -106,4 +106,37 @@ class TrainerResourceTest {
 
         log.info("Finished testing getTrainer_trainer_notexistent_throws_exception");
     }
+
+    @Test
+    void update_trainer_notexistent_throws_exception() {
+
+        log.info("Started testing update_trainer_notexistent_throws_exception");
+
+        when(trainerRepository.findById(1L)).thenReturn(Optional.empty());
+
+        TrainerDto requestTrainer = new TrainerDto();
+        TrainerNotFoundException trainerNotFoundException = assertThrows(TrainerNotFoundException.class, () -> trainerResource.updateTrainer(1L, requestTrainer));
+        assertTrue(trainerNotFoundException.getMessage().contains("Trainer with id 1 not found"));
+
+        log.info("Finished testing update_trainer_notexistent_throws_exception");
+    }
+
+    @Test
+    void update_trainer_mapping_correct() {
+
+        log.info("Started testing update_trainer_mapping_correct");
+
+        TrainerEntity trainerMock2 = new TrainerEntity(3L, "Test", 3L);
+        when(trainerRepository.findById(3L)).thenReturn(Optional.of(trainerMock2));
+
+        when(trainerRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+
+        TrainerDto requestTrainer = new TrainerDto(4L, "Test1", 4L);
+        TrainerDto result = trainerResource.updateTrainer(3L, requestTrainer);
+
+        TrainerDto expected = new TrainerDto(3L, "Test1", 4L);
+        assertEquals(expected, result);
+
+        log.info("Finished testing update_trainer_mapping_correct");
+    }
 }

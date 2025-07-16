@@ -32,9 +32,26 @@ public class TrainerResource {
 
         log.info("createTrainers called with {}", trainerCreationDto);
         List<TrainerDto> trainers = trainerService.createTrainers(trainerCreationDto);
-        log.info("createTrainers finished with result={}", trainers);
+        log.info("createTrainers finished with trainers={}", trainers);
 
         return trainers;
+    }
+
+    // @formatter:off
+    @Operation(summary = "Updates the trainer wit hthe path id to the given trainer", description = "Updates the trainer wit hthe path id to the given trainer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Trainers created successfully"),
+            @ApiResponse(responseCode = "404", description = "Trainer not found")
+    })
+    @PostMapping("/trainers/{trainerId}")
+    // @formatter:on
+    TrainerDto updateTrainer(@PathVariable @NotNull Long trainerId, @RequestBody @Valid TrainerDto trainerUpdate) {
+
+        log.info("updateTrainer called with trainerid={}, trainerUpdate={}", trainerId, trainerUpdate);
+        TrainerDto updatedTrainer = trainerService.updateTrainer(trainerId, trainerUpdate);
+        log.info("updateTrainer finished with updatedTrainer={}", updatedTrainer);
+
+        return updatedTrainer;
     }
 
     // @formatter:off
@@ -49,7 +66,7 @@ public class TrainerResource {
 
         log.info("getTrainer called with id={}", id);
         TrainerDto trainer = trainerService.getTrainer(id);
-        log.info("getTrainer finished with result={}", trainer);
+        log.info("getTrainer finished with trainer={}", trainer);
 
         return trainer;
     }
