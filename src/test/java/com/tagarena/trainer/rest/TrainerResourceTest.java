@@ -42,8 +42,8 @@ class TrainerResourceTest {
 
         log.info("Started testing createTrainers_amount2_saved_2trainers");
 
-        TrainerEntity trainerMock1 = new TrainerEntity(1L, "Test", 1L);
-        TrainerEntity trainerMock2 = new TrainerEntity(2L, "Test", 2L);
+        TrainerEntity trainerMock1 = new TrainerEntity(1L, "Test");
+        TrainerEntity trainerMock2 = new TrainerEntity(2L, "Test");
 
         when(trainerRepository.saveAll(any())).thenReturn(List.of(trainerMock1, trainerMock2));
 
@@ -51,9 +51,9 @@ class TrainerResourceTest {
         List<TrainerDto> result = trainerResource.createTrainers(TrainerCreationDto);
 
         assertEquals(2, result.size());
-        TrainerDto expectedTrainer1 = new TrainerDto(1L, "Test", 1L);
+        TrainerDto expectedTrainer1 = new TrainerDto(1L, "Test");
         assertEquals(expectedTrainer1, result.getFirst());
-        TrainerDto expectedTrainer2 = new TrainerDto(2L, "Test", 2L);
+        TrainerDto expectedTrainer2 = new TrainerDto(2L, "Test");
         assertEquals(expectedTrainer2, result.get(1));
 
         verify(trainerRepository, times(1)).saveAll(any());
@@ -66,7 +66,7 @@ class TrainerResourceTest {
 
         log.info("Started testing createTrainers_name_generated");
 
-        when(trainerRepository.saveAll(any())).thenReturn(List.of(new TrainerEntity(1L, "Test", 1L)));
+        when(trainerRepository.saveAll(any())).thenReturn(List.of(new TrainerEntity(1L, "Test")));
 
         TrainerCreationDto TrainerCreationDto = new TrainerCreationDto(1L);
         trainerResource.createTrainers(TrainerCreationDto);
@@ -83,12 +83,12 @@ class TrainerResourceTest {
 
         log.info("Started testing getTrainer_mapping_correct");
 
-        TrainerEntity mockTrainerEntity = new TrainerEntity(1L, "Test", 1L);
+        TrainerEntity mockTrainerEntity = new TrainerEntity(1L, "Test");
         when(trainerRepository.findById(1L)).thenReturn(Optional.of(mockTrainerEntity));
 
         TrainerDto result = trainerResource.getTrainer(1L);
 
-        TrainerDto expected = new TrainerDto(1L, "Test", 1L);
+        TrainerDto expected = new TrainerDto(1L, "Test");
         assertEquals(expected, result);
 
         log.info("Finished testing getTrainer_mapping_correct");
@@ -126,15 +126,15 @@ class TrainerResourceTest {
 
         log.info("Started testing update_trainer_mapping_correct");
 
-        TrainerEntity trainerMock2 = new TrainerEntity(3L, "Test", 3L);
+        TrainerEntity trainerMock2 = new TrainerEntity(3L, "Test");
         when(trainerRepository.findById(3L)).thenReturn(Optional.of(trainerMock2));
 
         when(trainerRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
-        TrainerDto requestTrainer = new TrainerDto(4L, "Test1", 4L);
+        TrainerDto requestTrainer = new TrainerDto(4L, "Test1");
         TrainerDto result = trainerResource.updateTrainer(3L, requestTrainer);
 
-        TrainerDto expected = new TrainerDto(3L, "Test1", 4L);
+        TrainerDto expected = new TrainerDto(3L, "Test1");
         assertEquals(expected, result);
 
         log.info("Finished testing update_trainer_mapping_correct");

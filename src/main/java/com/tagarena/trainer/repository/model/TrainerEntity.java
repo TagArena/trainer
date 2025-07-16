@@ -21,6 +21,4 @@ public class TrainerEntity {
     private Long id;
 
     private String name;
-
-    private Long creatureId;
 }
