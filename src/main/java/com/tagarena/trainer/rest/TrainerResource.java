@@ -43,7 +43,7 @@ public class TrainerResource {
             @ApiResponse(responseCode = "200", description = "Trainers created successfully"),
             @ApiResponse(responseCode = "404", description = "Trainer not found")
     })
-    @PostMapping("/trainers/{trainerId}")
+    @PutMapping("/trainers/{trainerId}")
     // @formatter:on
     TrainerDto updateTrainer(@PathVariable @NotNull Long trainerId, @RequestBody @Valid TrainerDto trainerUpdate) {
 
