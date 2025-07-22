@@ -23,6 +23,8 @@ public class TrainerServiceImpl implements TrainerService {
 
     private final ModelMapper modelMapper;
 
+    private final Faker faker;
+
     public TrainerDto getTrainer(Long trainerId) {
         TrainerEntity trainerEntityOptional = getTrainerEntity(trainerId);
         return modelMapper.map(trainerEntityOptional, TrainerDto.class);
@@ -30,10 +32,8 @@ public class TrainerServiceImpl implements TrainerService {
 
     public List<TrainerDto> createTrainers(TrainerCreationDto trainerCreationDto) {
         List<TrainerEntity> trainers = new ArrayList<>();
-        Faker faker = new Faker();
         for (int i = 0; i < trainerCreationDto.getAmount(); i++) {
-            TrainerEntity trainer = new TrainerEntity();
-            trainer.setName(faker.name().fullName());
+            TrainerEntity trainer = generateTrainer(trainerCreationDto);
             trainers.add(trainer);
         }
         List<TrainerEntity> savedTrainers = trainerRepository.saveAll(trainers);
@@ -58,4 +58,12 @@ public class TrainerServiceImpl implements TrainerService {
         }
         return trainerEntityOptional.get();
     }
+
+    private TrainerEntity generateTrainer(TrainerCreationDto trainerCreationDto) {
+        TrainerEntity trainer = new TrainerEntity();
+        trainer.setName(this.faker.name().fullName());
+        trainer.setLeagueIds(trainerCreationDto.getLeagueIds());
+        return trainer;
+    }
+
 }
