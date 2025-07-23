@@ -26,8 +26,8 @@ public class TrainerServiceImpl implements TrainerService {
     private final Faker faker;
 
     public TrainerDto getTrainer(Long trainerId) {
-        TrainerEntity trainerEntityOptional = getTrainerEntity(trainerId);
-        return modelMapper.map(trainerEntityOptional, TrainerDto.class);
+        TrainerEntity trainerEntity = getTrainerEntity(trainerId);
+        return modelMapper.map(trainerEntity, TrainerDto.class);
     }
 
     public List<TrainerDto> createTrainers(TrainerCreationDto trainerCreationDto) {
